@@ -10,6 +10,8 @@ This repo contains the plugin artifact needed for Cursor Marketplace submission 
 - `.mcp.json` pointing at the hosted OrgX MCP server
 - Cursor rules for the OrgX execution loop
 - Commands for starting and resuming workstreams, checking proof, and reviewing decisions
+- Operator chronicle reporting for yesterday, week, 30-day decisions, artifacts,
+  PR velocity, goals, initiatives, data gaps, and top priorities
 - Quiet hooks for session, tool, and subagent lifecycle events
 - Passive Work Graph hook outbox for audit-first reconciliation
 - Specialist agents for engineering, product, design, operations, marketing, sales, and orchestration
@@ -32,6 +34,11 @@ These hook records are a passive backstop for later Work Graph reconciliation.
 They should answer whether meaningful work happened without durable OrgX
 writeback. They do not store raw prompts, raw transcripts, API keys, tokens, or
 storage state.
+
+For live reporting, use MCP before hooks: `get_operator_chronicle` is the
+preferred tool when Cursor exposes it. If Cursor has a stale MCP tool list, use
+`orgx_recommend` with `mode: "morning_brief"` and present
+`reportingNarrative.briefMarkdown`.
 
 ## Marketplace
 

@@ -14,6 +14,11 @@ Keep Cursor work anchored to OrgX workstreams, decisions, proof, and execution s
 4. Surface blockers and pending decisions explicitly.
 5. Close with proof, artifacts, and concrete next actions.
 
+For broad status or reporting requests, start with `get_operator_chronicle`
+when Cursor exposes it. If the current Cursor MCP tool list is stale, use
+`orgx_recommend` with `mode: "morning_brief"` and present
+`reportingNarrative.briefMarkdown` before drilling into entities.
+
 ## Guardrails
 
 - Do not invent work that is not grounded in the active OrgX context.
