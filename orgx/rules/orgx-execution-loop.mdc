@@ -9,5 +9,12 @@ alwaysApply: true
 - Prefer starting from OrgX bootstrap context, resumable workstreams, and proof status before inventing new scope.
 - For "what happened", "what did we decide", "what shipped", goals, initiatives, gaps, or top priorities, prefer `get_operator_chronicle`; if Cursor's MCP tool list is stale, use `orgx_recommend` with `mode: "morning_brief"`.
 - If work is blocked by missing context or a real decision, surface it explicitly instead of guessing.
+- For a genuine human interruption, use `orgx_request_attention`, retain the
+  returned attention ID, and poll that same ID when work continues. Cursor does
+  not have a supported native defer-and-reply hook in this bundle; use
+  continuation strategy `poll` and never claim automatic resume.
+- Treat answer receipt, resuming, and resumed as distinct states. Emit
+  `orgx_ack_attention state=resumed` only after a new Cursor execution event.
+- Provider turn boundaries and automatic retries are not human decisions.
 - Close the loop with proof, artifacts, and verification steps whenever work is ready for review.
 - Keep repo-local overrides in `.cursor/orgx/` additive to the default OrgX bundle.
