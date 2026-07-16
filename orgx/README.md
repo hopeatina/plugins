@@ -10,6 +10,8 @@ This repo contains the plugin artifact needed for Cursor Marketplace submission 
 - `.mcp.json` pointing at the hosted OrgX MCP server
 - Cursor rules for the OrgX execution loop
 - Commands for starting and resuming workstreams, checking proof, and reviewing decisions
+- A truthful MCP attention loop for asking, polling, applying, and acknowledging
+  owner input without inventing native hook support
 - Operator chronicle reporting for yesterday, week, 30-day decisions, artifacts,
   PR velocity, goals, initiatives, data gaps, and top priorities
 - Quiet hooks for session, tool, and subagent lifecycle events
@@ -39,6 +41,19 @@ For live reporting, use MCP before hooks: `get_operator_chronicle` is the
 preferred tool when Cursor exposes it. If Cursor has a stale MCP tool list, use
 `orgx_recommend` with `mode: "morning_brief"` and present
 `reportingNarrative.briefMarkdown`.
+
+## Attention and continuation
+
+Use `/orgx-request-attention` when Cursor needs a real owner answer. The command
+uses `orgx_request_attention`, persists the returned ID in the conversation,
+then uses `orgx_poll_attention` and `orgx_ack_attention` when work continues.
+
+Cursor lifecycle hooks in this bundle can observe session, tool, and subagent
+events, but they do not expose a supported handle for deferring and replying to
+a native question in place. The plugin therefore declares continuation strategy
+`poll`, and only reports `resumed` after a new Cursor tool/edit/test event. This
+is intentionally different from the Codex app-server and Claude AskUserQuestion
+bridges, which can preserve a native request handle.
 
 ## Marketplace
 
